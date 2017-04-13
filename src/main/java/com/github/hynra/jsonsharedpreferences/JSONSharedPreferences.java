@@ -2,8 +2,11 @@ package com.github.hynra.jsonsharedpreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by hynra on 4/13/17.
@@ -24,7 +27,7 @@ public class JSONSharedPreferences {
     }
 
     public void save(Object object){
-        String val = new Gson().toJson(object.getClass());
+        String val = new Gson().toJson(object);
         mEditor.putString(object.getClass().getCanonicalName(), val);
     }
 
@@ -37,11 +40,11 @@ public class JSONSharedPreferences {
     }
 
     public Object get(Object object){
-
         String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
-        Object obj = new Gson().fromJson(val, object.getClass());
-
-        return obj;
+        object = object.getClass();
+        object = new Gson().fromJson(val, (Class<Object>) object);
+        return object;
     }
+
 
 }
