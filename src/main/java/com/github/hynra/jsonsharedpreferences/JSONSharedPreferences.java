@@ -51,13 +51,13 @@ public class JSONSharedPreferences {
         mEditor.commit();
     }
 
-    public Object get(Object object) throws Exception{
+    public Object get(Object object) throws ParsingException{
         try {
             String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
             object = object.getClass();
             object = new Gson().fromJson(val, (Class<Object>) object);
         }catch (JsonSyntaxException exception){
-            throw new JsonSyntaxException(exception);
+            throw new ParsingException(exception.getMessage());
         }
 
         return object;
