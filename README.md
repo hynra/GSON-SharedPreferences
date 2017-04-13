@@ -17,7 +17,7 @@ Imagine you have plenty of static data in JSON, and you have to save it to appli
 	}
   ```
   
-  * Add depedency
+  * Add dependency
   
   ```
   	dependencies {
@@ -39,7 +39,7 @@ example :
   }
   ```
   
-  object :
+  Gson object :
   
   ```java
   package com.example;
