@@ -36,4 +36,12 @@ public class JSONSharedPreferences {
         mEditor.commit();
     }
 
+    public Object get(Object object){
+
+        String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
+        Object obj = new Gson().fromJson(val, object.getClass());
+
+        return obj;
+    }
+
 }
