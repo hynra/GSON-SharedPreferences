@@ -125,3 +125,9 @@ this.website = website;
   
   must be wrap with `ParsingException` to avoid parsing error.
   
+  * need `SharedPreferences` object ?
+  
+  ```java
+  SharedPreferences prefs = gsonSharedPrefs.getSharedPreferences;
+  ```
+  
