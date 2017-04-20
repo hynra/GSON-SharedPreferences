@@ -1,8 +1,10 @@
 # GSON SharedPreferences
 
-*This is simple lib : Save your Gson object to Android Shared Preferences. Yes, just it!*
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-GSON--SharedPreferences-blue.svg?style=flat)](https://android-arsenal.com/details/1/5614)
 
-Imagine you have plenty of static data in JSON, and you have to save it to application state. Maybe this lib is suitable for you.
+*Save your Gson object to Android Shared Preferences*
+
+Imagine you have plenty of static data in JSON, and you have to save it to application state. Then this lib is suitable for you.
 
 ## Add to your Project
 
@@ -27,7 +29,7 @@ Imagine you have plenty of static data in JSON, and you have to save it to appli
 
 ## How To
 
-* prepare your object via `http://www.jsonschema2pojo.org/`, `https://github.com/joelittlejohn/jsonschema2pojo`, etc.
+* prepare or generate your object via `http://www.jsonschema2pojo.org/`, `https://github.com/joelittlejohn/jsonschema2pojo`, etc.
 
 example : 
 
