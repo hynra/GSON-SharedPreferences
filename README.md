@@ -109,7 +109,7 @@ this.website = website;
   
   ```java
   GSONSharedPreferences gsonSharedPrefs = new GSONSharedPreferences(context, "<your-prefs-name>");
-  gsonSharedPrefs.save(new Profile(), "<your-json-object>");
+  gsonSharedPrefs.save(new Profile(), jsonObject);
   ```
   
   * Get your object :
