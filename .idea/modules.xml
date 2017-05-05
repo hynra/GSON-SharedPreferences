@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VidyanusaMobile.iml" filepath="$PROJECT_DIR$/VidyanusaMobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GSON-SharedPreferences.iml" filepath="$PROJECT_DIR$/GSON-SharedPreferences.iml" />
       <module fileurl="file://$PROJECT_DIR$/gsonsharedpreferences/gsonsharedpreferences.iml" filepath="$PROJECT_DIR$/gsonsharedpreferences/gsonsharedpreferences.iml" />
     </modules>
   </component>
