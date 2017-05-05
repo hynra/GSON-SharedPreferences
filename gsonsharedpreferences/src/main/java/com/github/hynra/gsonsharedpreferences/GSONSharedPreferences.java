@@ -1,18 +1,15 @@
 package com.github.hynra.gsonsharedpreferences;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.lang.reflect.Array;
 
-import java.util.Objects;
 
 
 /**
@@ -52,7 +49,7 @@ public class GSONSharedPreferences {
 
 
     /** save objects from objects  **/
-    public void save(Object[] objects){
+    public void saveObjects(Object[] objects){
         String[] vals = new String[objects.length];
         for(int i = 0; i <objects.length; i++){
             vals[i] = new Gson().toJson(objects[i]);
@@ -69,10 +66,10 @@ public class GSONSharedPreferences {
             String[] vals = new String[array.length()];
             for(int i = 0; i <vals.length; i++){
 
-                    vals[i] = new Gson().toJson(array.getJSONObject(i).toString());
+                vals[i] = array.getJSONObject(i).toString();
                 mEditor.putString(object.getClass().getCanonicalName()+i, vals[i]);
             }
-            mEditor.putInt(object.getClass().getCanonicalName(), array.length());
+            mEditor.putInt(object.getClass().getCanonicalName()+"[]", array.length());
             commit();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -87,10 +84,10 @@ public class GSONSharedPreferences {
             String[] vals = new String[array.length()];
             for(int i = 0; i <vals.length; i++){
 
-                vals[i] = new Gson().toJson(array.getJSONObject(i).toString());
+                vals[i] = array.getJSONObject(i).toString();
                 mEditor.putString(object.getClass().getCanonicalName()+i, vals[i]);
             }
-            mEditor.putInt(object.getClass().getCanonicalName(), array.length());
+            mEditor.putInt(object.getClass().getCanonicalName()+"[]", array.length());
             commit();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -144,17 +141,15 @@ public class GSONSharedPreferences {
     public Object[] getObjects(Object object) throws ParsingException{
         Object[] objects = null;
         try {
-            int size = mSharedPrefs.getInt(object.getClass().getCanonicalName(), 0);
-            objects = new Object[size];
+            int size = mSharedPrefs.getInt(object.getClass().getCanonicalName()+"[]", 0);
+            objects = (Object[]) Array.newInstance(object.getClass(), size);
             String[] vals = new String[size];
             for(int i = 0; i < size; i++){
-                vals[i] = mSharedPrefs.getString(objects[i].getClass().getCanonicalName()+i, "");
-                objects[i] = objects[i].getClass();
-                objects[i] = new Gson().fromJson(vals[i], (Class<Object>) objects[i]);
+                vals[i] = mSharedPrefs.getString(object.getClass().getCanonicalName()+i, "");
+                objects[i] = new Gson().fromJson(vals[i], (Class<Object>) object.getClass());
             }
-
-        }catch (JsonSyntaxException exception){
-            throw new ParsingException(exception.getMessage());
+        } catch (Exception e) {
+            throw new ParsingException(e.getMessage());
         }
         return objects;
     }
@@ -164,6 +159,7 @@ public class GSONSharedPreferences {
     public JSONObject getJsonObject(Object object) throws ParsingException{
         String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
         JSONObject jsonObject = null;
+        object = object.getClass();
         try {
             jsonObject = new JSONObject(val);
         } catch (JSONException e) {
@@ -188,15 +184,14 @@ public class GSONSharedPreferences {
 
     /**  get json array **/
     public JSONArray getJsonArray(Object object) throws ParsingException{
-        int size = mSharedPrefs.getInt(object.getClass().getCanonicalName(), 0);
-        String[] vals = new String[size];
         JSONArray jsonArray = new JSONArray();
         try {
+            int size = mSharedPrefs.getInt(object.getClass().getCanonicalName()+"[]", 0);
             for(int i =0; i < size; i++){
                 JSONObject jsonObject = new JSONObject(mSharedPrefs.getString(object.getClass().getCanonicalName()+i, ""));
                 jsonArray.put(jsonObject);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ParsingException(e.getMessage());
         }
@@ -206,15 +201,14 @@ public class GSONSharedPreferences {
 
     /**  get json array string **/
     public String getJsonArrayString(Object object) throws ParsingException{
-        int size = mSharedPrefs.getInt(object.getClass().getCanonicalName(), 0);
-        String[] vals = new String[size];
         JSONArray jsonArray = new JSONArray();
         try {
+            int size = mSharedPrefs.getInt(object.getClass().getCanonicalName()+"[]", 0);
             for(int i =0; i < size; i++){
                 JSONObject jsonObject = new JSONObject(mSharedPrefs.getString(object.getClass().getCanonicalName()+i, ""));
                 jsonArray.put(jsonObject);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ParsingException(e.getMessage());
         }
