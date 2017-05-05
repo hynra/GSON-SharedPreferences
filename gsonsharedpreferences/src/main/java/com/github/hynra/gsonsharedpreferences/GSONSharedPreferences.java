@@ -95,4 +95,15 @@ public class GSONSharedPreferences {
     }
 
 
+    public String getString(Object object) throws ParsingException{
+        String val = "";
+        try {
+            val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
+        }catch (JsonSyntaxException exception){
+            throw new ParsingException(exception.getMessage());
+        }
+        return val;
+    }
+
+
 }
