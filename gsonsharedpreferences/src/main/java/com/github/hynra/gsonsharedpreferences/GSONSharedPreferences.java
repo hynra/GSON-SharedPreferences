@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -77,11 +79,20 @@ public class GSONSharedPreferences {
         }catch (JsonSyntaxException exception){
             throw new ParsingException(exception.getMessage());
         }
-
         return object;
     }
 
-
+    public JSONObject getJson(Object object) throws ParsingException{
+        String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(val);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new ParsingException(e.getMessage());
+        }
+        return jsonObject;
+    }
 
 
 }
