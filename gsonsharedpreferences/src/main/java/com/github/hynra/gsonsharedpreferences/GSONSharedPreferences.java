@@ -11,6 +11,8 @@ import com.google.gson.JsonSyntaxException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 
 /**
  * Created by hynra on 4/13/17.
@@ -51,6 +53,18 @@ public class GSONSharedPreferences {
         commit();
     }
 
+
+    public void save(Object[] objects){
+        String vals[] = new String[objects.length];
+        for(int i = 0; i <objects.length; i++){
+            vals[i] = new Gson().toJson(objects[i]);
+            mEditor.putString(objects[i].getClass().getCanonicalName()+i, vals[i]);
+        }
+        mEditor.putInt(objects.getClass().getCanonicalName(), objects.length);
+        commit();
+    }
+
+
     public void save(Object object, String values){
         mEditor.putString(object.getClass().getCanonicalName(), values);
         commit();
@@ -81,6 +95,9 @@ public class GSONSharedPreferences {
         }
         return object;
     }
+
+
+
 
     public JSONObject getJson(Object object) throws ParsingException{
         String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
