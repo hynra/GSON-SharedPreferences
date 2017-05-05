@@ -55,7 +55,7 @@ public class GSONSharedPreferences {
 
 
     public void save(Object[] objects){
-        String vals[] = new String[objects.length];
+        String[] vals = new String[objects.length];
         for(int i = 0; i <objects.length; i++){
             vals[i] = new Gson().toJson(objects[i]);
             mEditor.putString(objects[i].getClass().getCanonicalName()+i, vals[i]);
@@ -97,7 +97,20 @@ public class GSONSharedPreferences {
     }
 
 
+    public Object[] get(Object[] objects) throws ParsingException{
+        try {
+            int size = mSharedPrefs.getInt(objects.getClass().getCanonicalName(), 0);
+            String[] vals = new String[size];
+            for(int i = 0; i < size; i++){
+                objects[i] = objects[i].getClass();
+                objects[i] = new Gson().fromJson(vals[i], (Class<Object>) objects[i]);
+            }
 
+        }catch (JsonSyntaxException exception){
+            throw new ParsingException(exception.getMessage());
+        }
+        return objects;
+    }
 
     public JSONObject getJson(Object object) throws ParsingException{
         String val = mSharedPrefs.getString(object.getClass().getCanonicalName(), "");
