@@ -1,6 +1,6 @@
 # GSON SharedPreferences
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-GSON--SharedPreferences-blue.svg?style=flat)](https://android-arsenal.com/details/1/5614)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-GSON--SharedPreferences-blue.svg?style=flat)](https://android-arsenal.com/details/1/5614)     ---    v 1.1
 
 *Save your Gson object to Android Shared Preferences*
 
@@ -90,26 +90,10 @@ this.website = website;
   
   * Save your object :
   
-  **From existing Gson**
-  
   ```java
   Profile profile = new Gson().fromJson("<your-json-string-obj>", Profile.class);
   GSONSharedPreferences gsonSharedPrefs = new GSONSharedPreferences(context, "<your-prefs-name>");
   gsonSharedPrefs.save(profile);
-  ```
-  
-  **with json string**
-  
-  ```java
-  GSONSharedPreferences gsonSharedPrefs = new GSONSharedPreferences(context, "<your-prefs-name>");
-  gsonSharedPrefs.save(new Profile(), "<your-json-string-obj>");
-  ```
-  
-  **with json object**
-  
-  ```java
-  GSONSharedPreferences gsonSharedPrefs = new GSONSharedPreferences(context, "<your-prefs-name>");
-  gsonSharedPrefs.save(new Profile(), jsonObject);
   ```
   
   * Get your object :
@@ -124,12 +108,4 @@ this.website = website;
     e.printStackTrace();
   }
   ```
-  
-  must be wrap with `ParsingException` to avoid parsing error.
-  
-  * need `SharedPreferences` object ?
-  
-  ```java
-  SharedPreferences prefs = gsonSharedPrefs.getSharedPreferences;
-  ```
-  
+  See Wiki for full docs : https://github.com/hynra/GSON-SharedPreferences/wiki
