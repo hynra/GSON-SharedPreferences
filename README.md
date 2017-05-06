@@ -23,7 +23,7 @@ Imagine you have plenty of static data in JSON, and you have to save it to appli
   
   ```
   	dependencies {
-		compile 'com.github.hynra:GSON-SharedPreferences:1.0'
+		compile 'com.github.hynra:GSON-SharedPreferences:1.1'
 	}
   ```
 
